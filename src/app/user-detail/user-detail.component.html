@@ -1,0 +1,116 @@
+<div>
+  <!-- <div
+style="background-color: #19aa8d;"
+> -->
+
+  <div class="">
+    <div class="card-body">
+      <div class="d-flex flex-column align-items-center text-center">
+        <img
+          [src]=""
+          alt="Admin"
+          class="rounded-circle img-fluid"
+          width="150"
+        />
+        <div class="mt-3">
+          <h4>{{ response.username }}</h4>
+          <p class="text-secondary mb-1">Name : {{ response.name }}</p>
+          <p class="text-muted font-size-sm">Email : {{ response.email }}</p>
+          <button class="btn btn-primary mx-2" (click)="changePassword()">
+            Change Password
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="signup-form" *ngIf="flagPassword">
+    <form [formGroup]="udpateDetails" (ngSubmit)="onSubmit()">
+      <h2>Change Password</h2>
+      <p></p>
+      <hr />
+
+      <div class="form-group">
+        <div class="input-group d-flex align-items-center">
+          <span class="input-group-addon"><i class="fa fa-lock mx-1"></i></span>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="oldPassword"
+            placeholder="Password"
+            required="required"
+          />
+        </div>
+        <div
+          *ngIf="
+            !udpateDetails.get('oldPassword')?.valid &&
+            udpateDetails.get('oldPassword')?.touched
+          "
+          class="d-flex text-danger justify-content-end"
+        >
+          Please enter valid email!!
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group d-flex align-items-center">
+          <span class="input-group-addon"><i class="fa fa-lock mx-1"></i></span>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="newPassword"
+            placeholder="New Password"
+            required="required"
+          />
+        </div>
+        <div
+          *ngIf="
+            !udpateDetails.get('newPassword')?.valid &&
+            udpateDetails.get('newPassword')?.touched
+          "
+          class="d-flex text-danger justify-content-end"
+        >
+          Password must contain at least one number, one uppercase and a
+          lowercase letter and at least 8 characters.
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group d-flex align-items-center">
+          <span class="input-group-addon">
+            <i class="fa fa-lock mx-1"></i>
+          </span>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="confirm_password"
+            placeholder="Confirm Password"
+            required="required"
+          />
+        </div>
+        <div
+          *ngIf="
+            (!udpateDetails.get('confirm_password')?.valid &&
+              udpateDetails.get('confirm_password')?.touched) ||
+            (udpateDetails.get('confirm_password')?.touched &&
+              udpateDetails.get('confirm_password')?.value !=
+                udpateDetails.get('newPassword')?.value)
+          "
+          class="d-flex text-danger justify-content-end"
+        >
+          Please enter valid confirm password that match to password!!
+        </div>
+      </div>
+      <div class="form-group">
+        <!-- <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
+      </div>
+      <div class="form-group d-flex justify-content-center">
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg"
+          [disabled]="!udpateDetails.valid"
+        >
+          Update Password
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

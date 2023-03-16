@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="card" style="width: 100%">
+    <div class="g-0 pt-3 mx-3">
+      <!-- <img [src]='response.image' class="card-img-top  " alt="..." />
+        <div class="mt-2 d-flex flex-row align-item-center">
+          <img [src] = 'response.userProfile' class="mx-3 card-img-top img-fluid rounded-circle" alt="..."
+            style="width: 80px; height: 80px" /> -->
+
+      <span
+        class="mx-2 fw-light fst-italic d-flex flex-column justify-content-center"
+        style="font-size: small"
+      >
+        <span class="card-title h5"> By {{ response.lastModifiedBy }} </span>
+        <div class="card-title">
+          Created Date : {{ response.lastModifiedDate }}
+        </div>
+      </span>
+
+      <!-- <button class="btn btn-danger mx-5"  style="height: 3rem;"  *ngIf="authService.isAdmin()" (click)="deletePost()" >Delete</button>
+        </div> -->
+    </div>
+    <div class="card-body mx-2">
+      <div>
+        <span class="card-title h2">{{ response.title }} </span>
+      </div>
+      <p class="card-text mt-3">
+        {{ response.description }}
+        <br />
+        <br />
+      </p>
+
+      <app-comments
+        [data]="response.comments"
+        [postId]="response.id"
+      ></app-comments>
+    </div>
+  </div>
+</div>

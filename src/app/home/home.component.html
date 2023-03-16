@@ -1,0 +1,42 @@
+<div
+  infinite-scroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollThrottle]="1000"
+  (scrolled)="onScroll()"
+>
+  <div *ngFor="let item of responseData">
+    <div class="d-flex justify-content-center mt-3">
+      <div class="card" style="width: 50%">
+        <!-- <div class="container g-0">
+        <img
+          [src]="item.image"
+          class="card-img-top img-fluid w-100"
+          alt="..."
+        />
+        <div class="bottom-left">
+          <img
+            [src]="item.userProfile"
+            class="mx-3 card-img-top img-fluid rounded-circle"
+            alt="..."
+            style="width: 40px; height: 40px"
+          />
+        </div>
+      </div> -->
+        <div class="card-body">
+          <div>
+            <span class="card-title h5"> {{ item.title }} </span>
+            <span class="mx-2 fw-light fst-italic" style="font-size: small"
+              >By {{ item.lastModifiedBy }}
+            </span>
+          </div>
+          <p class="card-text d-inline-block col-10 text-truncate">
+            {{ item.description }}
+          </p>
+          <a [routerLink]="['/blog/', item.id]" class="btn btn-primary"
+            >Read more</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

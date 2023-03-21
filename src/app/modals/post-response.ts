@@ -11,6 +11,8 @@ export interface PostResponse {
   id: Number;
   title: string;
   description: string;
+  image: string;
+  profileImage: string;
   createdBy: string;
   createDate: string;
   lastModifiedBy: string;
@@ -22,6 +24,7 @@ export interface PostResponse {
 export interface CommentResponse {
   id: Number;
   body: string;
+  profileImage: string;
   createdBy: string;
   createDate: string;
   lastModifiedBy: string;

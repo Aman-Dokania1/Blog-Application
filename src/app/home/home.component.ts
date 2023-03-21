@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getPostByPageNumber(++this.pageNo).subscribe({
       next: (res) => {
         console.log(res);
-        this.responseData.push(...res.content);
+        if (res.content) this.responseData.push(...res.content);
       },
       error: (err) => {
         console.log(err);

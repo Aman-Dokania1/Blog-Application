@@ -7,21 +7,21 @@
   <div *ngFor="let item of responseData">
     <div class="d-flex justify-content-center mt-3">
       <div class="card" style="width: 50%">
-        <!-- <div class="container g-0">
-        <img
-          [src]="item.image"
-          class="card-img-top img-fluid w-100"
-          alt="..."
-        />
-        <div class="bottom-left">
+        <div class="container g-0">
           <img
-            [src]="item.userProfile"
-            class="mx-3 card-img-top img-fluid rounded-circle"
+            [src]="item.image"
+            class="card-img-top img-fluid w-100"
             alt="..."
-            style="width: 40px; height: 40px"
           />
+          <div class="bottom-left">
+            <img
+              [src]="item.profileImage"
+              class="mx-3 card-img-top img-fluid rounded-circle"
+              alt="..."
+              style="width: 40px; height: 40px"
+            />
+          </div>
         </div>
-      </div> -->
         <div class="card-body">
           <div>
             <span class="card-title h5"> {{ item.title }} </span>

@@ -20,6 +20,7 @@ export class CreatePostComponent implements OnInit {
   createPost!: FormGroup;
 
   categories!: DropdownItemInterface[];
+  fileToUpload!: File;
 
   ngOnInit(): void {
     this.categories = [
@@ -34,33 +35,44 @@ export class CreatePostComponent implements OnInit {
     this.createPost = new FormGroup({
       title: new FormControl(null, [Validators.minLength(2)]),
       description: new FormControl(null, [Validators.minLength(10)]),
+      image: new FormControl(null, Validators.required),
       categoryId: new FormControl(null, Validators.required),
     });
   }
 
+  onChangeFile(event: any) {
+    if (event.target.files.length > 0 && event.target.files[0])
+      this.fileToUpload = event.target.files[0];
+    console.log(event.target);
+    console.log(event.target.files);
+    console.log(this.fileToUpload);
+  }
+
   onSubmit() {
     console.log(this.createPost.value);
-    this.homeService.createPost(this.createPost.value).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.toastService.toastTrigger({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'Post Created Successfully',
-        });
-        this.router.navigate(['']);
-      },
-      error: (err) => {
-        console.log(err);
-        console.log(err.error);
-        console.log(err.error.message);
-        console.log('Inside Error');
-        this.toastService.toastTrigger({
-          severity: 'error',
-          summary: 'Failure',
-          detail: err.error.message,
-        });
-      },
-    });
+    this.homeService
+      .createPost(this.createPost.value, this.fileToUpload)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.toastService.toastTrigger({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Post Created Successfully',
+          });
+          this.router.navigate(['']);
+        },
+        error: (err) => {
+          console.log(err);
+          console.log(err.error);
+          console.log(err.error.message);
+          console.log('Inside Error');
+          this.toastService.toastTrigger({
+            severity: 'error',
+            summary: 'Failure',
+            detail: err.error.message,
+          });
+        },
+      });
   }
 }

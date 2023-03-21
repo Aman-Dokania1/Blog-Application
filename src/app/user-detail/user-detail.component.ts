@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { UserDetails } from '../modals/user-response';
 import { AuthService } from '../service/auth.service';
 import { ToastTriggerService } from '../service/toast-trigger.service';
@@ -18,12 +19,14 @@ import { ToastTriggerService } from '../service/toast-trigger.service';
 export class UserDetailComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private toggleService: ToastTriggerService
+    private toggleService: ToastTriggerService,
+    private dom: DomSanitizer
   ) {}
 
   response: UserDetails = {} as UserDetails;
   udpateDetails!: FormGroup;
   flagPassword = false;
+  image: any;
 
   ngOnInit() {
     this.udpateDetails = new FormGroup({
@@ -47,6 +50,12 @@ export class UserDetailComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.response = res;
+        // console.log(url);
+        // console.log(JSON.stringify(res.profileImage));
+        // console.log(res.profileImage);
+
+        // this.image = JSON.stringify(url);
+
         console.log(res.profileImage);
       },
       error: (err) => {
@@ -88,5 +97,9 @@ export class UserDetailComponent implements OnInit {
         });
       },
     });
+  }
+
+  sanatise(url: any) {
+    return this.dom.bypassSecurityTrustResourceUrl(url);
   }
 }
